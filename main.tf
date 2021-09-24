@@ -21,6 +21,8 @@ terraform {
 provider "aws" {
   profile = "default"
   region  = "us-east-2"
+  access_key = var.aws_access
+  secret_key = var.aws_secret
 }
 
 resource "aws_instance" "app_server" {
