@@ -1,4 +1,13 @@
 terraform {
+  backend "remote" {
+    #         # The name of your Terraform Cloud organization.
+    organization = "remi-org"
+    #
+    #         # The name of the Terraform Cloud workspace to store Terraform state files in.
+    workspaces {
+      name = "remi-workspace"
+    }
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
