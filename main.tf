@@ -21,28 +21,24 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "us-east-2"
+  region  = "us-east-1"
 }
 
 resource "aws_instance" "app_server" {
-  ami                    = "ami-00dfe2c7ce89a450b"
+  ami                    = "ami-0133407e358cc1af0"
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.instance.id]
-
-  user_data = <<EOF
-  #!/bin/bash
-  echo "Hello, World!" > index.html
-  nohup busybox httpd -f -p 8080 &
-  EOF
+  user_data              = data.template_file.user_data.rendered
+  vpc_security_group_ids = [aws_security_group.app_server.id]
 
   tags = var.ec2_tags
 
 }
 
-resource "aws_security_group" "instance" {
+resource "aws_security_group" "app_server" {
+  name = var.ec2_tags.Name
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = var.instance_port
+    to_port     = var.instance_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -57,4 +53,14 @@ resource "aws_s3_bucket" "bucket32" {
   }
 
   tags = var.s3_tags
+}
+
+data "template_file" "user_data" {
+  template = file("${path.module}/user-data/user-data.sh")
+
+  vars = {
+    instance_tag_name  = var.ec2_tags.Name
+    instance_tag_owner = var.ec2_tags.Owner
+    instance_port      = var.instance_port
+  }
 }

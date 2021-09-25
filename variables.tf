@@ -15,3 +15,9 @@ variable "s3_tags" {
     Owner = "InfraTeam"
   }
 }
+
+variable "instance_port" {
+  description = "The port the EC2 Instance should listen on for HTTP requests."
+  type        = number
+  default     = 8080
+}
