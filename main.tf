@@ -21,12 +21,12 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "us-east-1"
+  region  = var.aws_region
 }
 
 resource "aws_instance" "app_server" {
-  ami                    = "ami-0133407e358cc1af0"
-  instance_type          = "t2.micro"
+  ami                    = var.machine_image
+  instance_type          = var.instance_type
   user_data              = data.template_file.user_data.rendered
   vpc_security_group_ids = [aws_security_group.app_server.id]
 
@@ -45,11 +45,11 @@ resource "aws_security_group" "app_server" {
 }
 
 resource "aws_s3_bucket" "bucket32" {
-  bucket = "flugel-bucket"
-  acl    = "private"
+  bucket = var.bucket_prefix
+  acl    = var.acl
 
   versioning {
-    enabled = "true"
+    enabled = var.versioning
   }
 
   tags = var.s3_tags
