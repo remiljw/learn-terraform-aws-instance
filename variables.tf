@@ -22,10 +22,10 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "bucket_prefix" {
+variable "bucket_name" {
   type        = string
-  description = "(required since we are not using 'bucket') Creates a unique bucket name beginning with the specified prefix"
-  default     = "my-s3bucket"
+  description = "he Name tag to set for the S3 Bucket."
+  default     = "flugel-bucket"
 }
 variable "acl" {
   type        = string

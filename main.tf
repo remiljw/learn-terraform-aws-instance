@@ -45,7 +45,7 @@ resource "aws_security_group" "app_server" {
 }
 
 resource "aws_s3_bucket" "bucket32" {
-  bucket = var.bucket_prefix
+  bucket = var.bucket_name
   acl    = var.acl
 
   versioning {
