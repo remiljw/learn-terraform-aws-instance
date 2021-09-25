@@ -1,6 +1,7 @@
 terraform {
   backend "remote" {
     #         # The name of your Terraform Cloud organization.
+    hostname     = "app.terraform.io"
     organization = "remi-org"
     #
     #         # The name of the Terraform Cloud workspace to store Terraform state files in.
