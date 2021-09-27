@@ -74,6 +74,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
+        terraform_wrapper: false
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     - name: Set up Go
@@ -95,6 +96,7 @@ jobs:
 
     defaults:
       run:
+        working-directory: ${{ env.tf_actions_working_dir }}
         shell: bash
 
     steps:
@@ -111,14 +113,22 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
+      id: init
       run: terraform init
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
+      id: fmt
       run: terraform fmt -check
+
+
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
+      id: plan
       run: terraform plan
 
    
@@ -143,7 +153,7 @@ jobs:
 
           </details>
 
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
 
           github.issues.createComment({
             issue_number: context.issue.number,
