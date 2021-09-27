@@ -4,7 +4,7 @@ import (
 	"testing"
 	
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestInfrastructure(t *testing.T) {
@@ -25,6 +25,15 @@ func TestInfrastructure(t *testing.T) {
 
 	// Run `terraform output` to get the tags of the instance
 	
-	output := terraform.Output(t, terraformOptions, "resource_tags")
-	assert.Equal(t, "map[Name:Flugel Owner:InfraTeam]", output)
+	output := terraform.OutputMap(t, terraformOptions, "resource_tags")
+
+
+	expectedLen := 2
+	expectedMap := map[string]string{
+		"Name": "Flugel",
+		"Owner": "InfraTeam",
+	}
+
+	require.Len(t, output, expectedLen, "Output should contain %d item(s)", expectedLen)
+	require.Equal(t, expectedMap, output, "Map %q should match %q", expectedMap, output)
 }
