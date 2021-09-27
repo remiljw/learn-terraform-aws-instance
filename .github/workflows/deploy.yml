@@ -1,12 +1,6 @@
 name: 'Deploy to Production'
 
 on:
-  push:
-    branches:
-    - master
-  pull_request:
-    branches:
-    - master
   workflow_run:
     workflows: ["Build and Test"]
     branches: [master]
@@ -36,7 +30,6 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-        terraform_wrapper: false
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
 
