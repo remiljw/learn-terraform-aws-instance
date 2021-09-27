@@ -39,7 +39,7 @@ variable "versioning" {
   default     = true
 }
 variable "resource_tags" {
-  type        = map(any)
+  type        = map(string)
   description = "(Optional) A mapping of tags to assign to the EC2 Instance."
   default = {
     Name  = "Flugel"
