@@ -63,7 +63,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./app
+        working-directory: ./test
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -82,11 +82,9 @@ jobs:
         go-version: 1.17
 
     - name: Build Module
-      working-directory: ./test
       run: go build -v ./...
 
     - name: Test
-      working-directory: ./test
       run: go test -v ./...
 
   deploy:

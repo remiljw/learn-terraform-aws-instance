@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestInfrastructure(t *testing.T) {
+func TestInfrastructureTags(t *testing.T) {
 	t.Parallel()
 
 	// Construct the terraform options with default retryable errors to handle the most common
@@ -36,4 +36,5 @@ func TestInfrastructure(t *testing.T) {
 
 	require.Len(t, output, expectedLen, "Output should contain %d item(s)", expectedLen)
 	require.Equal(t, expectedMap, output, "Map %q should match %q", expectedMap, output)
+
 }
