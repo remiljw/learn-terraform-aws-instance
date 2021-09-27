@@ -14,7 +14,7 @@ func TestInfrastructure(t *testing.T) {
 	// retryable errors in terraform testing.
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		// The path to where our Terraform code is located
-		TerraformDir: "../infrastructure",
+		TerraformDir: "../",
 	})
 
 	// At the end of the test, run `terraform destroy` to clean up any resources that were created.
@@ -24,13 +24,10 @@ func TestInfrastructure(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	// Run `terraform output` to get the tags of the instance
-	tag = "{ 
-			'Name'  = 'Flugel'
-			'Owner' = 'InfraTeam' 
-		}"
+	
 	ec2_output := terraform.Output(t, terraformOptions, "ec2_tags")
 	s3_output := terraform.Output(t, terraformOptions, "s3_tags")
-	assert.Equal(t, tag, ec2_output)
-	assert.Equal(t, tag, s3__output)
+	assert.Equal(t, "map[Name:Flugel Owner:InfraTeam]", ec2_output)
+	assert.Equal(t, "map[Name:Flugel Owner:InfraTeam]", s3_output)
 
 }
