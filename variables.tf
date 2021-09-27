@@ -38,7 +38,7 @@ variable "versioning" {
   description = "(Optional) A state of versioning."
   default     = true
 }
-variable "ec2_tags" {
+variable "resource_tags" {
   type        = map(any)
   description = "(Optional) A mapping of tags to assign to the EC2 Instance."
   default = {
@@ -47,12 +47,4 @@ variable "ec2_tags" {
   }
 }
 
-variable "s3_tags" {
-  type        = map(any)
-  description = "(Optional) A mapping of tags to assign to the S3 Bucket."
-  default = {
-    Name  = "Flugel"
-    Owner = "InfraTeam"
-  }
-}
 

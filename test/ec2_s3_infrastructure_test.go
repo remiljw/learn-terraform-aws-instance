@@ -25,8 +25,6 @@ func TestInfrastructure(t *testing.T) {
 
 	// Run `terraform output` to get the tags of the instance
 	
-	output := terraform.Output(t, terraformOptions, "ec2_tags")
-	assert.Equal(t, "map[Name:Flugel Owner:InfraTeam]", ec2_output)
-	assert.Equal(t, "map[Name:Flugel Owner:InfraTeam]", s3_output)
-
+	output := terraform.Output(t, terraformOptions, "resource_tags")
+	assert.Equal(t, "map[Name:Flugel Owner:InfraTeam]", output)
 }

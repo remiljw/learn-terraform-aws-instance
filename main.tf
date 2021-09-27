@@ -30,12 +30,12 @@ resource "aws_instance" "app_server" {
   user_data              = data.template_file.user_data.rendered
   vpc_security_group_ids = [aws_security_group.app_server.id]
 
-  tags = var.ec2_tags
+  tags = var.resource_tags
 
 }
 
 resource "aws_security_group" "app_server" {
-  name = var.ec2_tags.Name
+  name = var.resource_tags.Name
   ingress {
     from_port   = var.instance_port
     to_port     = var.instance_port
@@ -52,15 +52,15 @@ resource "aws_s3_bucket" "bucket32" {
     enabled = var.versioning
   }
 
-  tags = var.s3_tags
+  tags = var.resource_tags
 }
 
 data "template_file" "user_data" {
   template = file("${path.module}/user-data/user-data.sh")
 
   vars = {
-    instance_tag_name  = var.ec2_tags.Name
-    instance_tag_owner = var.ec2_tags.Owner
+    instance_tag_name  = var.resource_tags.Name
+    instance_tag_owner = var.resource_tags.Owner
     instance_port      = var.instance_port
   }
 }
