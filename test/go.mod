@@ -1,4 +1,4 @@
-module github.com/remiljw/learn-terraform-aws-instance
+module github.com/remiljw/learn-terraform-aws-instance/test
 
 go 1.15
 
