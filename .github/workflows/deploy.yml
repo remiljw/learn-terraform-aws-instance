@@ -11,15 +11,14 @@ on:
 jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    name: 'Build and Test'
+    name: 'Deploy to Production'
     runs-on: ubuntu-latest
-    environment: test
+    environment: production
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
-        working-directory: ./test
 
     steps:
     # Checkout the repository to the GitHub Actions runner
