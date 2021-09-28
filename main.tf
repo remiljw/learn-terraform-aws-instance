@@ -34,6 +34,10 @@ set -e
 sudo apt-get update
 sudo apt-get install -y python3 python3-pip
 pip3 install boto3 flask
+
+mkdir templates
+cd templates
+
 echo "Name = <h3>Not Much Going On Here</h3> <a href='/tags.html'><button>See Tags</button>\
         </a><span><a href='/shutdown'><button>Kill Server</button></a>" > index.html
 echo "Name = ${data.template_file.user_data.vars.instance_tag_name} <br> Owner = ${data.template_file.user_data.vars.instance_tag_owner} <br>\
