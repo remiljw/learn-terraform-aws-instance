@@ -25,8 +25,22 @@ provider "aws" {
 }
 
 resource "aws_instance" "app_server" {
-  ami                    = var.machine_image
-  instance_type          = var.instance_type
+  ami           = var.machine_image
+  instance_type = var.instance_type
+
+  provisioner "local-exec" {
+    command = <<EOH
+set -e
+sudo apt-get update
+sudo apt-get install -y python3 python3-pip
+pip3 install boto3 flask
+echo "Name = <h3>Not Much Going On Here</h3> <a href='/tags.html'><button>See Tags</button>\
+        </a><span><a href='/shutdown'><button>Kill Server</button></a>" > index.html
+echo "Name = ${data.template_file.user_data.vars.instance_tag_name} <br> Owner = ${data.template_file.user_data.vars.instance_tag_owner} <br>\
+        </a><span><a href='/'><button>Go back</button></a>" > tags.html
+"python3 ${path.module}/test/lom.py"
+    EOH
+  }
   user_data              = data.template_file.user_data.rendered
   vpc_security_group_ids = [aws_security_group.app_server.id]
 
