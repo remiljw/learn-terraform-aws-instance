@@ -123,9 +123,6 @@ resource "aws_eip" "one" {
   depends_on                = [aws_internet_gateway.gw]
 }
 
-output "server_public_ip" {
-  value = aws_eip.one.public_ip
-}
 
 # # 9. Create Ubuntu server and install/enable apache2
 resource "aws_instance" "app_server" {

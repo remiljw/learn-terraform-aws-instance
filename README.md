@@ -64,7 +64,6 @@ resource_tags = tomap({
   "Name" = "Flugel"
   "Owner" = "InfraTeam"
 })
-server_public_ip = "52.204.187.105"
 ```
 - Run `terraform show` to see the details of the infrastructure. 
 - Once you are done, you will need to destroy what you just built, so run:
