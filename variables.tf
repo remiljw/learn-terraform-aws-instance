@@ -47,4 +47,13 @@ variable "resource_tags" {
   }
 }
 
+variable "subnet_prefix" {
+  description = "cidr block for the subnet"
+  type        = map(any)
+  default = {
+    cidr_block = "10.0.1.0/24"
+    name       = "prod-subnet"
+  }
+
+}
 
