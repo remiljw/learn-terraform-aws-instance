@@ -10,10 +10,9 @@ To be able to run or test this infrastructure, you will need to get a few things
 - Your AWS credentials. You can create a new [Access Key on this page](https://console.aws.amazon.com/iam/home?#/security_credentials).
 
 # Steps
-- Configure the AWS CLI from your terminal. Follow the prompts to input your AWS Access Key ID and Secret Access Key. Also input `us-east-1` as region, then `json` as format.
-```json
-aws configure
-```
+- Launch your terminal
+- Run `aws configure` to configure the AWS CLI from your terminal. Follow the prompts to input your AWS Access Key ID and Secret Access Key. Set the region `us-east-1`, then `json` as format.
+
 - You will need to create your organization and workspace on Terraform Cloud. Follow these [instructions](https://learn.hashicorp.com/tutorials/terraform/github-actions) to help you set that up.
 
 - Open `main.tf` and on line 5 and 9 respectively, replace the `organization` and workspaces `name` field to the organization and workspace you created in the previous step.
