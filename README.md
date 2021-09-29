@@ -14,7 +14,7 @@ To be able to run or test this infrastructure, you will need to get a few things
 ```json
 aws configure
 ```
-- You will need to create your organization and workspace on Terraform Cloud. Follow these[instructions](https://learn.hashicorp.com/tutorials/terraform/github-actions) to help you set that up.
+- You will need to create your organization and workspace on Terraform Cloud. Follow these [instructions](https://learn.hashicorp.com/tutorials/terraform/github-actions) to help you set that up.
 
 - Open `main.tf` and on line 5 and 9 respectively, replace the `organization` and workspaces `name` field to the organization and workspace you created in the previous step.
 ```hcl
@@ -34,7 +34,7 @@ terraform {
 
 - Open `main.tf` and on line 134 change the value of `key_name` to the name of your downloaded key
 ```json
-key_name      = "your_key_name"
+key_name      = "<your_key_name>"
 ```
 - On line 149, edit the `private_key` to the path of tour key which you added to the root of this project. 
 ```json
@@ -43,9 +43,13 @@ file("${path.module}/<your_key_name>.pem")
 
 - Launch your terminal and cd to the root of this project, run the following commands to deploy the infrastructure:
 - - `terraform init`
+- - - initiates terraform
 - - `terraform fmt` 
+- - - formats the files to match the canonical standar
 - - `terraform validate`
+- - - ensures the files are syntactically valid and internally consistent
 - - `terraform apply -auto-approve`
+- - - creates the infrastructure
 
 - Wait for the infrastructure to deploy. On successful deploy you should have an output as this on your terminal:
 ```shell
@@ -62,6 +66,7 @@ resource_tags = tomap({
 })
 server_public_ip = "52.204.187.105"
 ```
+- Run `terraform show` to see the details of the infrastructure. 
 - Once you are done, you will need to destroy what you just built, so run:
 `terraform destroy -auto-approve` 
 
