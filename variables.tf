@@ -13,7 +13,7 @@ variable "machine_image" {
 variable "instance_port" {
   description = "The port the EC2 Instance should listen on for HTTP requests."
   type        = number
-  default     = 5000
+  default     = 8080
 }
 
 variable "instance_type" {
