@@ -32,13 +32,13 @@ terraform {
 ```
 - Create your [AWS Key Pair in the AWS Console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair), download it, and move it to the root of this project.
 
-- Open `main.tf` and on line 134 change the value of `key_name` to the name of your downloaded key
+- Open `main.tf` and on line 131 change the value of `key_name` to the name of your downloaded key
 ```json
 key_name      = "<your_key_name>"
 ```
-- On line 149, edit the `private_key` to the path of tour key which you added to the root of this project. 
+- On line 146, edit the `private_key` to the path of tour key which you added to the root of this project. 
 ```json
-file("${path.module}/<your_key_name>.pem")
+private_key = file("${path.module}/<your_key_name>.pem")
 ```
 
 - Launch your terminal and cd to the root of this project, run the following commands to deploy the infrastructure:
