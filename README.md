@@ -9,15 +9,15 @@ To be able to run or test this infrastructure, you will need to get a few things
 - An [AWS](https://aws.amazon.com/free/) account.
 - Your AWS credentials. You can create a new [Access Key on this page](https://console.aws.amazon.com/iam/home?#/security_credentials).
 
-
-Configure the AWS CLI from your terminal. Follow the prompts to input your AWS Access Key ID and Secret Access Key. Also input `us-east-1` as region, then `json` as format.
+# Steps
+- Configure the AWS CLI from your terminal. Follow the prompts to input your AWS Access Key ID and Secret Access Key. Also input `us-east-1` as region, then `json` as format.
 ```json
 aws configure
 ```
-You will need to create your organization and workspace on Terraform Cloud. Follow these[instructions](https://learn.hashicorp.com/tutorials/terraform/github-actions) to help you set that up.
+- You will need to create your organization and workspace on Terraform Cloud. Follow these[instructions](https://learn.hashicorp.com/tutorials/terraform/github-actions) to help you set that up.
 
-Open `main.tf` and on line 5 and 9 respectively, replace the `organization` and workspaces `name` field to the organization and workspace you created in the previous step.
-```json
+- Open `main.tf` and on line 5 and 9 respectively, replace the `organization` and workspaces `name` field to the organization and workspace you created in the previous step.
+```hcl
 terraform {
   backend "remote" {
     #         # The name of your Terraform Cloud organization.
@@ -30,24 +30,25 @@ terraform {
     }
   }
 ```
-Create your [AWS Key Pair in the AWS Console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair), download it, and move it to the root of this project.
+- Create your [AWS Key Pair in the AWS Console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair), download it, and move it to the root of this project.
 
-Open `main.tf` and on line 134 change the value of `key_name` to the name of your downloaded key
+- Open `main.tf` and on line 134 change the value of `key_name` to the name of your downloaded key
 ```json
 key_name      = "your_key_name"
 ```
-- on line 149, edit the `private_key` to the path of tour key which you added to the root of this project. 
+- On line 149, edit the `private_key` to the path of tour key which you added to the root of this project. 
 ```json
 file("${path.module}/<your_key_name>.pem")
 ```
 
-Launch your terminal and cd to the root of this project, run the following commands to deploy the infrastructure:
-- `terraform init`
-- `terraform fmt` 
-- `terraform validate`
-- `terraform apply -auto-approve`
-Wait for the infrastructure to deploy. On successful deploy you should have an output as this on your terminal:
-```json
+- Launch your terminal and cd to the root of this project, run the following commands to deploy the infrastructure:
+- - `terraform init`
+- - `terraform fmt` 
+- - `terraform validate`
+- - `terraform apply -auto-approve`
+
+- Wait for the infrastructure to deploy. On successful deploy you should have an output as this on your terminal:
+```shell
 Apply complete! Resources: 10 added, 0 changed, 0 destroyed.
 
 Outputs:
@@ -61,7 +62,7 @@ resource_tags = tomap({
 })
 server_public_ip = "52.204.187.105"
 ```
-Once you are done, you will need to destroy what you just built, so run:
+- Once you are done, you will need to destroy what you just built, so run:
 `terraform destroy -auto-approve` 
 
 # Testing
