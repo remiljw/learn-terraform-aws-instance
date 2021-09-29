@@ -3,14 +3,32 @@
 # Prerequisites
 To be able to run or test this infrastructure, you will need to get a few things up and running: 
 - [Golang](https://golang.org/doc/install) installed
+- A [Terraform Cloud Account](https://app.terraform.io/)
 - The [Terraform CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started) 0.14.8+ installed.
 - The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) installed.
 - An [AWS](https://aws.amazon.com/free/) account.
 - Your AWS credentials. You can create a new [Access Key on this page](https://console.aws.amazon.com/iam/home?#/security_credentials).
 
+
 Configure the AWS CLI from your terminal. Follow the prompts to input your AWS Access Key ID and Secret Access Key. Also input `us-east-1` as region, then `json` as format.
 ```json
 aws configure
+```
+You will need to create your organization and workspace on Terraform Cloud. Follow these[instructions](https://learn.hashicorp.com/tutorials/terraform/github-actions) to help you set that up.
+
+Open `main.tf` and on line 5 and 9 respectively, replace the `organization` and workspaces `name` field to the organization and workspace you created in the previous step.
+```json
+terraform {
+  backend "remote" {
+    #         # The name of your Terraform Cloud organization.
+    hostname     = "app.terraform.io"
+    organization = "<your-organozation>"
+    #
+    #         # The name of the Terraform Cloud workspace to store Terraform state files in.
+    workspaces {
+      name = "<your-workspace>"
+    }
+  }
 ```
 Create your [AWS Key Pair in the AWS Console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair), download it, and move it to the root of this project.
 
