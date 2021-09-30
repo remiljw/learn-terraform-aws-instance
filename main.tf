@@ -165,6 +165,7 @@ resource "aws_instance" "app_server" {
     inline = [
       "chmod +x /tmp/script.sh",
       "/tmp/script.sh ${var.instance_port} ${var.resource_tags.Name} ${var.resource_tags.Owner} ${aws_instance.app_server.id}",
+      "sleep 20",
     ]
   }
 
