@@ -179,12 +179,3 @@ resource "aws_s3_bucket" "bucket32" {
 
   tags = var.resource_tags
 }
-
-data "template_file" "user_data" {
-  vars = {
-    instance_tag_name  = var.resource_tags.Name
-    instance_tag_owner = var.resource_tags.Owner
-    instance_port      = var.instance_port
-    instance_id        = aws_instance.app_server.id
-  }
-}
