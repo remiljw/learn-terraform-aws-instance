@@ -25,7 +25,7 @@ terraform {
   backend "remote" {
     #         # The name of your Terraform Cloud organization.
     hostname     = "app.terraform.io"
-    organization = "<your-organozation>"
+    organization = "<your-organization>"
     #
     #         # The name of the Terraform Cloud workspace to store Terraform state files in.
     workspaces {
@@ -48,7 +48,7 @@ private_key = file("${path.module}/<your_key_name>.pem")
 - - `terraform init`
 - - - initiates terraform
 - - `terraform fmt` 
-- - - formats the files to match the canonical standar
+- - - formats the files to match the canonical standard
 - - `terraform validate`
 - - - ensures the files are syntactically valid and internally consistent
 - - `terraform apply -auto-approve`
