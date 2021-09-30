@@ -8,4 +8,4 @@ echo "INSTALLING DEPENDENCIES"
 pip3 install boto3 web.py
 echo "RUNNING FILE"
 echo $1 $2 $3 $4
-nohup python3 ~/server.py $1 "--var $2 $3 $4" &
+sudo nohup python3 ~/server.py $1 --var $2 $3 $4 &

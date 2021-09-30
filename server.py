@@ -1,7 +1,7 @@
 import web, boto3, sys
 
 region = 'us-east-1'
-ec2 = boto3.client('ec2', region_name=region)
+ec2 = boto3.client('ec2', aws_access_key_id='', aws_secret_access_key='', region_name=region)
 
 arguments = len(sys.argv) - 1
 position = 1
