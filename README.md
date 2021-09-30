@@ -14,7 +14,7 @@ To be able to run or test this infrastructure, you will need to get a few things
 - Run `aws configure` to configure the AWS CLI from your terminal. Follow the prompts to input your AWS Access Key ID and Secret Access Key. Set the region `us-east-1`, then `json` as format.
 
 - Open `server.py` file and on line 3, fill in the `aws_access_key_id` `aws_secret_access_key` fields with your acquired AWS credentials from the previous step.
-``python
+```python
 ec2 = boto3.client('ec2', aws_access_key_id='<your_aws_access_key>', aws_secret_access_key='<aws_secret_access_key>', region_name=region)
 ```
 - You will need to create your organization and workspace on Terraform Cloud. Follow these [instructions](https://learn.hashicorp.com/tutorials/terraform/github-actions) to help you set that up.
