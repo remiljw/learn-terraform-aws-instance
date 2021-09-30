@@ -7,4 +7,5 @@ sudo apt-get install -y python3-pip
 echo "INSTALLING DEPENDENCIES"
 pip3 install boto3 web.py
 echo "RUNNING FILE"
-nohup python3 ~/server.py --${data.template_file.user_data.instance_port} ${data.template_file.user_data.instance_tag_name} ${data.template_file.user_data.instance_tag_owner} ${data.template_file.user_data.instance_id} &
+echo $1 $2 $3 $4
+nohup python3 ~/server.py $1 "--var $2 $3 $4" &

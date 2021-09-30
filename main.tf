@@ -152,6 +152,11 @@ resource "aws_instance" "app_server" {
   }
 
   provisioner "file" {
+    source      = "templates"
+    destination = "/home/ubuntu/templates"
+  }
+
+  provisioner "file" {
     source      = "server.py"
     destination = "~/server.py"
   }
@@ -159,7 +164,7 @@ resource "aws_instance" "app_server" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/script.sh",
-      "/tmp/script.sh",
+      "/tmp/script.sh ${var.instance_port} ${var.resource_tags.Name} ${var.resource_tags.Owner} ${aws_instance.app_server.id}",
     ]
   }
 
