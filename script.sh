@@ -3,7 +3,7 @@ echo "RUNNING SUDO UPDATE"
 sudo apt-get update
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
-sudo apt-get install -y python3-pip  
+sudo apt-get install -y python3-pip  python3-setuptools
 echo "INSTALLING DEPENDENCIES"
 pip3 install boto3 web.py
 echo "RUNNING FILE"
